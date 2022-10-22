@@ -7,8 +7,9 @@ import { Book } from './entities/book.entity';
 describe('AppController', () => {
   let em: EntityManager;
   let orm: MikroORM;
+  let app: TestingModule;
   beforeEach(async () => {
-    const app: TestingModule = await Test.createTestingModule({
+    app = await Test.createTestingModule({
       controllers: [],
       providers: [],
       imports: [
@@ -17,7 +18,6 @@ describe('AppController', () => {
           dbName: 'local',
           user: 'root',
           type: 'postgresql',
-          debug: true,
         }),
       ],
     }).compile();
@@ -26,6 +26,14 @@ describe('AppController', () => {
     orm = app.get<MikroORM>(MikroORM);
   });
 
+  beforeAll((done) => {
+    done();
+  });
+  afterAll(async () => {
+    await orm.close(true);
+    await em.getConnection().close(true);
+    await app.close();
+  });
   describe('root', () => {
     it('Should return empty array or error of null is passed as argument to id', async () => {
       const forkedEm = em.fork();

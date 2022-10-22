@@ -16,16 +16,16 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
-ALTER TABLE ONLY public.book DROP CONSTRAINT book_author_id_fk;
-ALTER TABLE ONLY public.author DROP CONSTRAINT id;
-ALTER TABLE ONLY public.book DROP CONSTRAINT book_pk;
-ALTER TABLE public.book ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE public.author ALTER COLUMN id DROP DEFAULT;
-DROP SEQUENCE public.book_id_seq;
-DROP TABLE public.book;
-DROP SEQUENCE public.author_id_seq;
-DROP TABLE public.author;
-DROP SCHEMA public;
+ALTER TABLE IF EXISTS ONLY public.book DROP  CONSTRAINT  book_author_id_fk;
+ALTER TABLE IF EXISTS ONLY public.author DROP  CONSTRAINT id;
+ALTER TABLE IF EXISTS ONLY public.book DROP  CONSTRAINT book_pk;
+ALTER TABLE IF EXISTS public.book ALTER COLUMN id DROP  DEFAULT;
+ALTER TABLE IF EXISTS public.author ALTER COLUMN id DROP  DEFAULT;
+DROP SEQUENCE IF EXISTS public.book_id_seq;
+DROP TABLE IF EXISTS public.book;
+DROP SEQUENCE  IF EXISTS public.author_id_seq;
+DROP TABLE IF EXISTS public.author;
+DROP SCHEMA IF EXISTS public;
 --
 -- Name: public; Type: SCHEMA; Schema: -; Owner: root
 --

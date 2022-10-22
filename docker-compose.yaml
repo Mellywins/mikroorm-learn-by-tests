@@ -10,7 +10,10 @@ services:
       POSTGRES_HOST_AUTH_METHOD: trust
     volumes:
       - postgres:/data/postgres
-      - init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - '5432:5432'
     restart: unless-stopped
+
+volumes:
+  postgres:
